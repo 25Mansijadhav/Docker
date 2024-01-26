@@ -1,0 +1,25 @@
+# Dockerfile
+
+# Use Node.js image compatible with ARM and x86
+FROM node:14
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+
+# Install app dependencies
+RUN npm install
+
+# Copy server.js to the working directory
+COPY server.js .
+
+# Copy sample data files to /tmp/data
+COPY data /tmp/data
+
+# Expose port 8080
+EXPOSE 8080
+
+# Command to run the application
+CMD ["node", "server.js"]
